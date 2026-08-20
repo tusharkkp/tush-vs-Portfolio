@@ -1,0 +1,864 @@
+/* =========================================================
+   LOADING SCREEN
+   ========================================================= */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background: radial-gradient(circle at 50% 45%, rgba(15, 35, 60, 0.35), transparent 55%), #03070d;
+
+  color: #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 99999;
+
+  font-family:
+    "JetBrains Mono", "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
+}
+
+/* =========================================================
+   EXIT ANIMATION
+   ========================================================= */
+
+.loading-screen-exit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* =========================================================
+   DOT GRID
+   ========================================================= */
+
+.loading-dot-grid {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  overflow: hidden;
+
+  opacity: 0.32;
+
+  pointer-events: auto;
+}
+
+/*
+   Make sure the React Bits component fills
+   the entire loading screen.
+*/
+
+.loading-dot-grid .dot-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.loading-dot-grid .dot-grid__wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.loading-dot-grid .dot-grid__canvas {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   AMBIENT GLOWS
+   ========================================================= */
+
+.loading-glow {
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  filter: blur(100px);
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 0.18;
+}
+
+.loading-glow-one {
+  top: 10%;
+  left: 15%;
+
+  background: #2563eb;
+}
+
+.loading-glow-two {
+  right: 10%;
+  bottom: 5%;
+
+  background: #7c3aed;
+}
+
+/* =========================================================
+   SCANLINE
+   ========================================================= */
+
+.loading-scanline {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  height: 1px;
+
+  background: rgba(56, 189, 248, 0.12);
+
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  animation: loading-scan 4s linear infinite;
+}
+
+@keyframes loading-scan {
+  0% {
+    top: -5%;
+  }
+
+  100% {
+    top: 105%;
+  }
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.loading-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(620px, 90vw);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 22px;
+
+  padding: 30px;
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.loading-brand {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-bottom: 2px;
+
+  animation: loading-brand-in 0.8s ease-out both;
+}
+
+@keyframes loading-brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.loading-logo-container {
+  position: relative;
+
+  width: 120px;
+  height: 120px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 2px;
+}
+
+/* Logo */
+
+.loading-logo {
+  position: relative;
+
+  z-index: 3;
+
+  width: 92px;
+  height: 92px;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.25));
+
+  animation: loading-logo-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes loading-logo-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+/* =========================================================
+   LOGO RINGS
+   ========================================================= */
+
+.loading-logo-ring {
+  position: absolute;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(56, 189, 248, 0.3);
+
+  pointer-events: none;
+}
+
+.loading-logo-ring-one {
+  inset: 0;
+
+  animation: loading-ring-spin 8s linear infinite;
+
+  border-top-color: rgba(56, 189, 248, 0.9);
+  border-right-color: transparent;
+}
+
+.loading-logo-ring-two {
+  inset: 9px;
+
+  animation: loading-ring-spin-reverse 5s linear infinite;
+
+  border-bottom-color: rgba(129, 140, 248, 0.8);
+  border-left-color: transparent;
+}
+
+@keyframes loading-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-ring-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* =========================================================
+   LOGO GLOW
+   ========================================================= */
+
+.loading-logo-glow {
+  position: absolute;
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 50%;
+
+  background: rgba(14, 165, 233, 0.15);
+
+  filter: blur(25px);
+
+  z-index: 1;
+
+  animation: loading-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes loading-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* =========================================================
+   BRAND NAME
+   ========================================================= */
+
+.loading-brand-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0;
+
+  font-family: "Inter", "Segoe UI", sans-serif;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  letter-spacing: -1.5px;
+
+  line-height: 1;
+}
+
+.loading-brand-name > span:first-child {
+  color: #f1f5f9;
+}
+
+.loading-brand-accent {
+  color: #38bdf8;
+
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.loading-subtitle {
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  color: #64748b;
+
+  font-weight: 500;
+
+  margin-top: 1px;
+}
+
+/* =========================================================
+   TERMINAL
+   ========================================================= */
+
+.loading-terminal {
+  width: 100%;
+
+  background: rgba(5, 10, 18, 0.88);
+
+  border: 1px solid rgba(71, 85, 105, 0.45);
+
+  border-radius: 9px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(14, 165, 233, 0.04);
+
+  backdrop-filter: blur(14px);
+
+  animation: loading-terminal-in 0.8s 0.15s ease-out both;
+}
+
+@keyframes loading-terminal-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   TERMINAL HEADER
+   ========================================================= */
+
+.loading-terminal-header {
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 14px;
+
+  border-bottom: 1px solid rgba(71, 85, 105, 0.35);
+
+  background: rgba(15, 23, 42, 0.65);
+}
+
+/* Traffic lights */
+
+.loading-terminal-dots {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  width: 70px;
+}
+
+.loading-terminal-dots span {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  display: block;
+
+  background: #475569;
+}
+
+.loading-terminal-dots span:nth-child(1) {
+  background: #ef4444;
+}
+
+.loading-terminal-dots span:nth-child(2) {
+  background: #eab308;
+}
+
+.loading-terminal-dots span:nth-child(3) {
+  background: #22c55e;
+}
+
+/* Terminal title */
+
+.loading-terminal-title {
+  flex: 1;
+
+  text-align: center;
+
+  font-size: 11px;
+
+  color: #64748b;
+
+  margin-right: 70px;
+}
+
+/* Terminal status */
+
+.loading-terminal-status {
+  position: absolute;
+
+  right: 15px;
+
+  font-size: 8px;
+
+  letter-spacing: 1.5px;
+
+  color: #38bdf8;
+
+  opacity: 0.8;
+}
+
+/* =========================================================
+   TERMINAL BODY
+   ========================================================= */
+
+.loading-terminal-body {
+  padding: 18px 20px;
+
+  min-height: 92px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+/* Terminal line */
+
+.loading-terminal-line {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #cbd5e1;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* Prompt */
+
+.loading-terminal-prompt {
+  color: #38bdf8;
+
+  font-weight: 700;
+}
+
+/* Muted */
+
+.loading-terminal-muted {
+  color: #64748b;
+
+  animation: terminal-line-in 0.25s ease-out;
+}
+
+@keyframes terminal-line-in {
+  from {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Ready */
+
+.loading-terminal-ready {
+  color: #22c55e;
+}
+
+.loading-terminal-check {
+  color: #22c55e;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   PROGRESS SECTION
+   ========================================================= */
+
+.loading-progress-section {
+  width: 100%;
+
+  animation: loading-progress-in 0.8s 0.25s ease-out both;
+}
+
+@keyframes loading-progress-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+
+.loading-progress-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+}
+
+.loading-progress-label {
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  color: #64748b;
+}
+
+.loading-progress-number {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #38bdf8;
+
+  min-width: 40px;
+
+  text-align: right;
+
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   PROGRESS TRACK
+   ========================================================= */
+
+.loading-progress-track {
+  position: relative;
+
+  width: 100%;
+
+  height: 5px;
+
+  border-radius: 999px;
+
+  overflow: visible;
+
+  background: rgba(30, 41, 59, 0.9);
+
+  border: 1px solid rgba(71, 85, 105, 0.25);
+}
+
+/* Progress fill */
+
+.loading-progress-fill {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, #2563eb, #38bdf8, #818cf8);
+
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+
+  transition: width 0.08s linear;
+}
+
+/* Glowing progress point */
+
+.loading-progress-glow {
+  position: absolute;
+
+  top: 50%;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: #7dd3fc;
+
+  box-shadow:
+    0 0 8px #38bdf8,
+    0 0 18px rgba(56, 189, 248, 0.6);
+
+  transition: left 0.08s linear;
+}
+
+/* =========================================================
+   PROGRESS META
+   ========================================================= */
+
+.loading-progress-meta {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 7px;
+
+  font-size: 8px;
+
+  color: #475569;
+
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.loading-footer {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: #475569;
+
+  font-size: 9px;
+
+  animation: loading-footer-in 0.8s 0.35s ease-out both;
+}
+
+@keyframes loading-footer-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Status */
+
+.loading-status-indicator {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+/* Status dot */
+
+.loading-status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow: 0 0 7px rgba(34, 197, 94, 0.7);
+
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Version */
+
+.loading-version {
+  color: #334155;
+
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .loading-content {
+    width: 90vw;
+
+    padding: 20px;
+
+    gap: 18px;
+  }
+
+  .loading-logo-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .loading-logo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .loading-brand-name {
+    font-size: 25px;
+  }
+
+  .loading-terminal-body {
+    padding: 15px;
+
+    font-size: 10px;
+  }
+
+  .loading-terminal-title {
+    font-size: 9px;
+  }
+
+  .loading-terminal-status {
+    display: none;
+  }
+
+  .loading-subtitle {
+    font-size: 7px;
+
+    letter-spacing: 2px;
+  }
+}
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-logo,
+  .loading-logo-ring,
+  .loading-logo-glow,
+  .loading-scanline,
+  .loading-status-dot {
+    animation: none;
+  }
+
+  .loading-screen {
+    transition: none;
+  }
+}
