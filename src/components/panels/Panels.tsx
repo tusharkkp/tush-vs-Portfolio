@@ -191,11 +191,9 @@ export function AboutPanel({ onOpen }: { onOpen: (k: FileKey) => void }) {
       <div className="grid gap-6 md:grid-cols-2">
         <div>
           <SectionHeading>readme</SectionHeading>
-          <div className="rounded-lg border border-border bg-card p-5 text-sm leading-relaxed">
+          <div className="rounded-lg border border-border bg-card p-5 text-sm leading-relaxed">s
             <p>
-              Currently focused on LLM-powered analytics, data-annotation workflows, and building
-              calm, information-dense interfaces. I also lead technical execution for department
-              events at MIT AOE.
+              TY Student at MIT Academy of Engineering, Pune (2024–2028). Focused on building production-grade AI products end-to-end — data pipelines, LLM integrations, and thoughtful interfaces. Based in {profile.location}.
             </p>
             <ul className="mt-4 space-y-2 text-muted-foreground">
               <li className="flex items-center gap-2">
