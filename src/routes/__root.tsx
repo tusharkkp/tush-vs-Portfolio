@@ -173,7 +173,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LoadingScreen />
+      {/* <LoadingScreen /> */}
       <Outlet />
     </QueryClientProvider>
   );
